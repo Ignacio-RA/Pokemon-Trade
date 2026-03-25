@@ -1,14 +1,18 @@
+# Dependencias
 node_modules/
 
-public/uploads/pokemon/
+# Carpeta de subidas: Ignora el contenido, pero mantiene la carpeta
 public/uploads/pokemon/*
 !public/uploads/pokemon/.gitkeep
 
+# Variables de entorno y configuración
 .env
 
+# Logs de error
 npm-debug.log*
 yarn-error.log*
 
+# Archivos de sistema y editores
 .DS_Store
 Thumbs.db
 .vscode/
