@@ -2,7 +2,7 @@ node_modules/
 
 public/uploads/pokemon/
 public/uploads/pokemon/*
-!public/uploads/.gitkeep
+!public/uploads/pokemon/.gitkeep
 
 .env
 
