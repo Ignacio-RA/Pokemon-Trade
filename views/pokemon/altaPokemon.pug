@@ -1,0 +1,27 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Alta Pokemon
+
+  body()
+    form(action="/inicio/alta-pokemon/new" method="POST", enctype="multipart/form-data")
+          
+        label(for="nombre") Nombre:
+        input(type="text" id="nombre" name="nombre" required placeholder="Ingresa el nombre del Pokemon")
+
+          
+        label(for="tipo") Tipo:
+        input(type="text" id="tipo" name="tipo" required placeholder="Ingresa su tipo")
+
+        label(for="nivel") Nivel:
+        input(type="number" step="1" min="0" id="nivel" name="nivel" required placeholder="Ingresa su nivel")
+
+        label(for="precio") Precio:
+        input(type="number" step="0.01" min="0" id="precio" name="precio" required placeholder="Ingresa su precio")
+
+        label(for="foto") Foto:
+        input(type="file" id="foto" name="foto" required)
+
+        button(type="submit") Crear 

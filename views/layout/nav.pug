@@ -1,0 +1,51 @@
+nav.navbar.navbar-expand-lg(style='background-color: #611232;' data-bs-theme='dark')
+  .container-fluid
+    a.navbar-brand(href='/inicio')
+      img(src='../../img/logo_3.png' alt='Bootstrap' height='70')
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+            | Administrar Hoteles
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='/admin/alta-hoteles') Alta Hotel
+            li
+              a.dropdown-item(href='/admin/modificar-hotel') Modificar Hotel
+            li
+              a.dropdown-item(href='/admin/lista-borrar-hotel') Borrar Hotel
+            li
+              hr.dropdown-divider
+            li
+              a.dropdown-item(href='/admin/lista-hoteles') Hoteles
+            li
+              a.dropdown-item(href='/admin/lista-habitaciones') Habitaciones
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' )
+            | Administrar Gerentes
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='/admin/alta-gerente') Alta Gerente
+            li
+              a.dropdown-item(href='/admin/modificar-gerente') Modificar Gerente
+            li
+              a.dropdown-item(href='/admin/lista-borrar-gerente') Borrar Gerente
+            li
+              hr.dropdown-divider
+            li
+              a.dropdown-item(href='/admin/lista-gerentes') Gerentes
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' )
+            | Administrar Usuarios
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='/admin/alta-usuario') Alta Usuario
+            li
+              a.dropdown-item(href='') Modificar Usuario
+            li
+              a.dropdown-item(href='') Borrar Usuario
+            li
+              hr.dropdown-divider
+            li
+              a.dropdown-item(href='/admin/lista-gerentes') Usuarios
+

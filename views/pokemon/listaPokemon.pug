@@ -1,0 +1,31 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Alta Pokemon
+
+  body()
+
+    h2 Lista de Pokémon
+
+    table(border="1")
+    thead
+        tr
+        th Nombre
+        th Tipo
+        th Nivel
+        th Precio
+        th Imagen
+    tbody
+        each p in pokemones
+            tr
+                td= p.nombre
+                td= p.tipo
+                td= p.nivel
+                td= '$' + p.precio
+                td
+                if p.foto
+                    img(src=`/uploads/pokemon/${p.foto}`, width="80")
+                else
+                    | Sin imagen

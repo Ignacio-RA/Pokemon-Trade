@@ -1,0 +1,22 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Borrar Usuario
+
+  body()
+    table
+    thead
+        tr
+        th Correo
+        th Rol
+        th Acciones
+    tbody
+        each u in usuarios
+            tr
+            td= u.correo
+            td= u.rol
+            td
+            form(method="POST", action=`/inicio/eliminar-usr/delete/${u.id}?_method=DELETE`)
+                button(type="submit") Eliminar

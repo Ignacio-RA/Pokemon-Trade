@@ -1,0 +1,14 @@
+node_modules/
+
+public/uploads/pokemon/
+public/uploads/pokemon/*
+!public/uploads/.gitkeep
+
+.env
+
+npm-debug.log*
+yarn-error.log*
+
+.DS_Store
+Thumbs.db
+.vscode/

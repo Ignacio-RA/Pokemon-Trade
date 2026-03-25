@@ -1,0 +1,24 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Alta Usuario
+
+  body()
+    form(action="/inicio/alta-usr/new" method="POST")
+          
+        label(for="correo") Usuario
+        input(type="text" id="correo" name="correo" required placeholder="Ingresa tu correo")
+
+          
+        label(for="contrasena") Contraseña
+        input(type="password" id="contrasena" name="contrasena" required placeholder="Ingresa tu contraseña")
+
+        label(for="rol") Elija un rol
+        select(name="rol" id="rol") 
+            option(value="admin") Administrador 
+            option(value="vendedor") Vendedor
+            option(value="comprador") Comprador
+
+        button(type="submit") Crear 

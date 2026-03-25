@@ -1,0 +1,26 @@
+{
+  "name": "losiaboys",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "inicio": "nodemon index.js"
+  },
+  "author": "losIAboys",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bootstrap": "^5.3.8",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jquery": "^4.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "mariadb": "^3.5.2",
+    "method-override": "^3.0.0",
+    "multer": "^2.1.1",
+    "nodemon": "^3.1.14",
+    "pug": "^3.0.4",
+    "sequelize": "^6.37.8"
+  }
+}
