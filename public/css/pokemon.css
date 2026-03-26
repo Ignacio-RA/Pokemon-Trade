@@ -1,0 +1,99 @@
+/* RESET BÁSICO */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+
+  /* Fondo degradado Pokémon */
+  background: linear-gradient(135deg, #ffcb05, #3b4cca);
+  
+  min-height: 100vh;
+}
+
+/* CONTENEDOR */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* TARJETA */
+.card {
+  background: white;
+  padding: 30px;
+  width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* TÍTULOS */
+h1 {
+  color: #ffcb05; /* amarillo Pokémon */
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+form {
+  text-align: left;
+}
+
+/* LABELS */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+/* INPUT FILE */
+input[type="file"] {
+  background: #f0f0f0;
+  padding: 8px;
+}
+
+/* BOTÓN */
+button {
+  width: 100%;
+  padding: 12px;
+  background: #ffcb05;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+button:hover {
+  background: #e6b800;
+}
+
+/* LINK */
+.link {
+  display: block;
+  margin-top: 15px;
+  text-decoration: none;
+  color: #3b4cca; /* azul Pokémon */
+  text-align: center;
+}
+

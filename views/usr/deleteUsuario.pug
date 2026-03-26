@@ -1,22 +1,24 @@
-doctype html
-html(lang="es")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    title Borrar Usuario
+extends ../layout/index
 
-  body()
+block estilos
+  link(rel="stylesheet", href="/css/eliminarusr.css")
+  link(rel="shortcut icon", href="/favicon/poke2.png")
+
+block cuerpocontenido
+  .container
+    h2 Lista de Entrenadores
+
     table
-    thead
+      thead
         tr
-        th Correo
-        th Rol
-        th Acciones
-    tbody
+          th Correo
+          th Rol
+          th Acción
+      tbody
         each u in usuarios
-            tr
+          tr
             td= u.correo
             td= u.rol
             td
-            form(method="POST", action=`/inicio/eliminar-usr/delete/${u.id}?_method=DELETE`)
-                button(type="submit") Eliminar
+              form(method="POST", action=`/inicio/eliminar-usr/delete/${u.id}?_method=DELETE`)
+                button(type="submit" onclick="return confirm('¿Liberar entrenador?')") ❌ Liberar

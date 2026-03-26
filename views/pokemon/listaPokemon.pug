@@ -1,31 +1,23 @@
-doctype html
-html(lang="es")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    title Alta Pokemon
+extends ../layout/index
 
-  body()
+block estilos
+  link(rel="stylesheet", href="/css/listaPoke.css")
+  link(rel="shortcut icon", href="/favicon/poke2.png")
 
-    h2 Lista de Pokémon
+block cuerpocontenido
+  .container
+    h1 Lista de Pokémon
 
-    table(border="1")
-    thead
-        tr
-        th Nombre
-        th Tipo
-        th Nivel
-        th Precio
-        th Imagen
-    tbody
-        each p in pokemones
-            tr
-                td= p.nombre
-                td= p.tipo
-                td= p.nivel
-                td= '$' + p.precio
-                td
-                if p.foto
-                    img(src=`/uploads/pokemon/${p.foto}`, width="80")
-                else
-                    | Sin imagen
+    .grid
+      each p in pokemones
+        .card
+          if p.foto
+            img(src=`/uploads/pokemon/${p.foto}`)
+          else
+            img(src="/img/no-image.png")
+
+          h3= p.nombre
+
+          p.tipo Tipo: #{p.tipo}
+          p Nivel: #{p.nivel}
+          p.precio $#{p.precio}

@@ -1,24 +1,26 @@
-doctype html
-html(lang="es")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    title Alta Usuario
+extends ../layout/index
 
-  body()
-    form(action="/inicio/alta-usr/new" method="POST")
-          
-        label(for="correo") Usuario
-        input(type="text" id="correo" name="correo" required placeholder="Ingresa tu correo")
+block estilos
+  link(rel="stylesheet", href="/css/login.css")
+  link(rel="shortcut icon", href="/favicon/poke2.png")
 
-          
-        label(for="contrasena") Contraseña
-        input(type="password" id="contrasena" name="contrasena" required placeholder="Ingresa tu contraseña")
+block cuerpocontenido
+  .d-flex.justify-content-center.align-items-center(style="min-height: 80vh;")
+    .card.p-4(style="width: 400px;")
+      h2.text-center.mb-3 Crear Entrenador
 
-        label(for="rol") Elija un rol
-        select(name="rol" id="rol") 
-            option(value="admin") Administrador 
-            option(value="vendedor") Vendedor
-            option(value="comprador") Comprador
+      form(action="/inicio/alta-usr/new" method="POST")
+        
+        label Correo
+        input.form-control(type="text" name="correo" required placeholder="ash@pokemon.com")
 
-        button(type="submit") Crear 
+        label.mt-2 Contraseña
+        input.form-control(type="password" name="contrasena" required placeholder="••••••")
+
+        label.mt-2 Rol
+        select.form-control(name="rol")
+          option(value="admin") ADMIN
+          option(value="vendedor") VENDEDOR 
+          option(value="comprador") COMPRADOR
+
+        button.btn.btn-danger.w-100.mt-3(type="submit") Crear Cuenta

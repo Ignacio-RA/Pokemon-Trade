@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff0000, #ffffff);
+}
+
+/* Contenedor */
+.container {
+  width: 90%;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  border: 5px solid black;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Títulos */
+h1 {
+  text-align: center;
+  color: #ff0000;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #ff0000;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+}
+
+/* Filas */
+tbody tr:nth-child(even) {
+  background: #f5f5f5;
+}
+
+tbody tr:hover {
+  background: #ffe0e0;
+}
+
+/* Botón */
+button {
+  background: #ff0000;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #cc0000;
+}

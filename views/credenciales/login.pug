@@ -3,16 +3,24 @@ html(lang="es")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    title Iniciar Sesión
+    title Login Pokémon
+    link(rel="stylesheet", href="/css/login.css")
+    link(rel="shortcut icon", href="/favicon/poke2.png", type="image/x-icon")
 
-  body()
-    form(action="/login/validar" method="POST")
+  body
+    .container
+      .card
+        h1 Pokemon
+        h2 Iniciar Sesión
+
+        form(action="/login/validar" method="POST")
           
-        label(for="correo") Correo
-        input(type="text" id="correo" name="correo" required placeholder="Ingresa tu correo")
+          label(for="correo") Correo
+          input(type="text" id="correo" name="correo" required placeholder="Ash@pokemon.com")
 
-          
-        label(for="contrasena") Contraseña
-        input(type="password" id="contrasena" name="contrasena" required placeholder="Ingresa tu contraseña")
+          label(for="contrasena") Contraseña
+          input(type="password" id="contrasena" name="contrasena" required placeholder="••••••")
 
-        button(type="submit") Entrar    
+          button(type="submit") Entrar
+
+        

@@ -1,2 +1,17 @@
 extends ./layout/index
+
 block cuerpocontenido
+  .text-center
+    h1 Bienvenido #{usuario ? usuario.correo : "Invitado"}
+
+    if usuario && usuario.rol === 'admin'
+      h2 Panel Administrador
+      p Gestiona usuarios y Pokémon
+
+    if usuario && usuario.rol === 'vendedor'
+      h2 Panel Vendedor
+      p Gestiona tus Pokémon
+
+    if usuario && usuario.rol === 'comprador'
+      h2 Panel Comprador
+      p Explora el catálogo

@@ -1,0 +1,35 @@
+/* NAVBAR TEAM ROCKET */
+.navbar-rocket {
+  background: linear-gradient(90deg, #000000, #3b0a0a, #611232);
+  border-bottom: 2px solid #ff0000;
+}
+
+/* Marca */
+.navbar-rocket .navbar-brand {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+/* Links */
+.navbar-rocket .nav-link {
+  color: #ddd !important;
+}
+
+.navbar-rocket .nav-link:hover {
+  color: #ff0000 !important;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  background-color: #1a1a1a;
+  border: 1px solid #ff0000;
+}
+
+.dropdown-item {
+  color: #ddd;
+}
+
+.dropdown-item:hover {
+  background-color: #611232;
+  color: white;
+}

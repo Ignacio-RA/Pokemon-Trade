@@ -1,6 +1,6 @@
-import {Usuario} from '../models/relaciones.js'
+import { Usuario } from '../models/relaciones.js'
 
-const validarUsuario = async (req, res)=>{
+const validarUsuario = async (req, res) => {
     const { correo, contrasena } = req.body;
 
     console.log(req.body)
@@ -17,8 +17,16 @@ const validarUsuario = async (req, res)=>{
         return res.send("Contraseña incorrecta");
     }
 
-    res.redirect('/inicio')
-    }
+    // 🔥 ESTA ES LA LÍNEA QUE TE FALTABA
+    req.session.usuario = {
+        id: usuario.id,
+        correo: usuario.correo,
+        rol: usuario.rol
+    };
+
+    res.redirect('/inicio');
+}
 
 export {
-    validarUsuario}
+    validarUsuario
+}
