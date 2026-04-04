@@ -18,6 +18,14 @@ module.exports = (sequelize) => {
     fecha_transaccion: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW
+    },
+    fecha_respuesta: {
+      type: DataTypes.DATE,
+      defaultValue: null
+    },
+    estado: {
+      type: DataTypes.ENUM('pendiente', 'aprobada', 'rechazada'),
+      defaultValue: 'pendiente'
     }
   }, {
     tableName: 'venta',

@@ -17,7 +17,7 @@ const validarUsuario = async (req, res) => {
         return res.send("Contraseña incorrecta");
     }
 
-    // 🔥 ESTA ES LA LÍNEA QUE TE FALTABA
+    
     req.session.usuario = {
         id: usuario.id,
         correo: usuario.correo,

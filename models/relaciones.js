@@ -11,18 +11,29 @@ const Venta = VentaModel(db);
 
 // Relaciones
 
-// Usuario (1) -> (N) Venta
+// Usuario (comprador) -> Venta
 Usuario.hasMany(Venta, {
   foreignKey: "comprador_id"
 });
+
 Venta.belongsTo(Usuario, {
   foreignKey: "comprador_id"
 });
 
-// Pokemon (1) -> (1) Venta
-Pokemon.hasOne(Venta, {
+// Usuario (dueño) -> Pokemon
+Usuario.hasMany(Pokemon, {
+  foreignKey: "id_dueno"
+});
+
+Pokemon.belongsTo(Usuario, {
+  foreignKey: "id_dueno"
+});
+
+// Pokemon -> Venta (solicitudes)
+Pokemon.hasMany(Venta, {
   foreignKey: "pokemon_id"
 });
+
 Venta.belongsTo(Pokemon, {
   foreignKey: "pokemon_id"
 });

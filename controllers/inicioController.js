@@ -70,6 +70,8 @@ const postAltaPokemon = async (req,res)=>{
     try {
         const { nombre, tipo, nivel, precio } = req.body;
 
+        const usuario = req.session.usuario;
+        
         //Nombre de la foto
         const foto = req.file ? req.file.filename : null;
 
@@ -84,7 +86,8 @@ const postAltaPokemon = async (req,res)=>{
         tipo,
         nivel,
         precio,
-        foto
+        foto,
+        id_dueno: usuario.id
         });
 
         res.redirect("/inicio");
@@ -98,6 +101,15 @@ const postAltaPokemon = async (req,res)=>{
 const listarPokemon = async (req, res) => {
   try {
     const pokemones = await Pokemon.findAll({
+      where: {
+        estado: "disponible" // filtro
+      },
+      include: [
+        {
+          model: Usuario,
+          attributes: ["correo"]
+        }
+      ],
       order: [["id_pokemon", "DESC"]]
     });
 

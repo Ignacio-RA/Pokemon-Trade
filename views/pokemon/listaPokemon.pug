@@ -21,9 +21,10 @@ block cuerpocontenido
           p.tipo Tipo: #{p.tipo}
           p Nivel: #{p.nivel}
           p.precio $#{p.precio}
+          p Dueño: #{p.Usuario.correo}
 
           //Boton de compra
-          if !p.vendido
+          if p.estado == 'disponible'
             form(method="POST", action=`/inicio/comprar/${p.id_pokemon}`)
               button.btn-comprar(type="submit") Comprar
           else

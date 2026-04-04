@@ -29,14 +29,18 @@ module.exports = (sequelize) => {
         min: 0
       }
     },
-    vendido: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
+    estado: {
+      type: DataTypes.ENUM('disponible', 'pendiente', 'vendido'),
+      defaultValue: 'disponible'
     },
     foto: {
       type: DataTypes.STRING,
       allowNull: true
-    }
+    },
+    id_dueno: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   }, {
     tableName: 'pokemon',
     timestamps: true
