@@ -1,11 +1,16 @@
-import { where,Op } from "sequelize";
-import { Usuario, Pokemon } from "../models/relaciones.js";
+import { Op } from "sequelize";
+import db from "../config/db.js"
+import { Usuario, Pokemon, Venta } from "../models/relaciones.js";
 
 const inicio=(req,res)=>{
     res.render('credenciales/login');
 }
 const principal=(req,res)=>{
-    res.render('inicio');
+  const mensaje = req.query.msg;
+
+  res.render("inicio", {
+    mensaje
+  });
 }
 
 //Usuario - Controllers
@@ -42,7 +47,6 @@ const getDeleteUsuario = async (req,res)=>{
 }
 
 const DeleteUsuario = async (req,res)=>{
-    console.log(req.body.id)
     const { id } = req.params;
 
   try {
@@ -129,6 +133,50 @@ const listarPokemon = async (req, res) => {
   }
 };
 
+const comprarPokemon = async (req, res) => {
+  const id = req.params.id;
+  const usuario = req.session.usuario;
+  const t = await db.transaction();
+
+  try {
+    const pokemon = await Pokemon.findByPk(id, { transaction: t });
+
+    if (!pokemon || pokemon.estado !== "disponible") {
+      throw new Error("No disponible");
+    }
+
+    const pendiente = await Venta.findOne({
+      where: {
+        pokemon_id: id,
+        estado: "pendiente"
+      },
+      transaction: t
+    });
+
+    if (pendiente) {
+      throw new Error("Ya en proceso");
+    }
+
+    await Venta.create({
+      pokemon_id: id,
+      comprador_id: usuario.id
+    }, { transaction: t });
+
+    await pokemon.update(
+      { estado: "pendiente" },
+      { transaction: t }
+    );
+
+    await t.commit();
+
+    return res.redirect("/inicio?msg=compra_exitosa");
+
+  } catch (error) {
+    await t.rollback();
+    return res.redirect("/inicio?msg=error");
+  }
+}
+
 export {
     inicio,
     principal,
@@ -138,5 +186,6 @@ export {
     DeleteUsuario,
     getAltaPokemon,
     postAltaPokemon,
-    listarPokemon
+    listarPokemon,
+    comprarPokemon
 }

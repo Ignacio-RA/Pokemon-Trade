@@ -25,7 +25,7 @@ block cuerpocontenido
 
           //Boton de compra
           if p.estado == 'disponible'
-            form(method="POST", action=`/inicio/comprar/${p.id_pokemon}`)
+            form(action=`/inicio/comprar/${p.id_pokemon}`, method="POST")
               button.btn-comprar(type="submit") Comprar
           else
             button.btn-vendido(disabled) Vendido
