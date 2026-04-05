@@ -1,4 +1,4 @@
-import { where } from "sequelize";
+import { where,Op } from "sequelize";
 import { Usuario, Pokemon } from "../models/relaciones.js";
 
 const inicio=(req,res)=>{
@@ -100,9 +100,15 @@ const postAltaPokemon = async (req,res)=>{
 
 const listarPokemon = async (req, res) => {
   try {
+    const usuario = req.session.usuario;
+
+
     const pokemones = await Pokemon.findAll({
       where: {
-        estado: "disponible" // filtro
+        estado: "disponible", // filtro, solo los disponibles
+        id_dueno: {
+          [Op.ne]: usuario.id // no mostrar los propios
+        } 
       },
       include: [
         {
