@@ -6,11 +6,11 @@ const inicio=(req,res)=>{
     res.render('credenciales/login');
 }
 const principal=(req,res)=>{
-  const mensaje = req.query.msg;
+    const mensaje = req.query.msg;
 
-  res.render("inicio", {
-    mensaje
-  });
+    res.render("inicio", {
+      mensaje
+    });
 }
 
 //Usuario - Controllers
@@ -41,15 +41,15 @@ const postAltaUsuario = async (req,res)=>{
 const getDeleteUsuario = async (req,res)=>{
     const usuarios = await Usuario.findAll({
     attributes: ["id", "correo", "rol"] // incluye id aunque no lo muestres
-  });
+    });
 
-  res.render("usr/deleteUsuario", {usuarios})
+    res.render("usr/deleteUsuario", {usuarios})
 }
 
 const DeleteUsuario = async (req,res)=>{
     const { id } = req.params;
 
-  try {
+    try {
     const usuario = await Usuario.findByPk(id);
 
     if (!usuario) {
@@ -59,10 +59,10 @@ const DeleteUsuario = async (req,res)=>{
     await usuario.destroy();
 
       res.redirect('/inicio')
-  } catch (error) {
-    console.log(error);
-    res.send("Error al eliminar");
-  }
+    } catch (error) {
+      console.log(error);
+      res.send("Error al eliminar");
+    }
 }
 
 //Pokemon - Controllers
@@ -102,8 +102,65 @@ const postAltaPokemon = async (req,res)=>{
     }
 }
 
-const listarPokemon = async (req,res) => {
+const listarMisPokemon = async (req,res) => {
   try {
+    const usuario = req.session.usuario;
+
+    if (!usuario) {
+      return res.redirect("/login");
+    }
+
+    const pokemones = await Pokemon.findAll({
+      where: {
+        id_dueno: usuario.id,
+        estado: {
+          [Op.in]: ["disponible", "pendiente"] // 🔥 filtro clave
+        }
+      },
+      order: [["id_pokemon", "DESC"]]
+    });
+
+    res.render("pokemon/listaMisPokemon", {
+      pokemones,
+      usuario
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.send("Error al obtener tus Pokémon");
+  }
+}
+
+const deletePokemon = async (req,res) => {
+    const { id } = req.params
+    const usuario = req.session.usuario
+
+    try {
+      const pokemon = await Pokemon.findByPk(id)
+
+      // Validaciones
+      if (!pokemon) throw new Error("Pokemon no encontrado");
+
+      if (pokemon.id_dueno !== usuario.id) {
+        throw new Error("No autorizado");
+      }
+
+      if (pokemon.estado !== "disponible") {
+        throw new Error("No puedes eliminar este Pokémon");
+      }
+        
+      await pokemon.update({
+        estado: "eliminado"
+      })
+
+      return res.redirect("/inicio?msg=pokemon_eliminado")
+    } catch (error) {
+      return res.redirect(`/inicio?msg=error&error=${error.message}`)
+    }
+}
+
+const listarPokemon = async (req,res) => {
+    try {
     const usuario = req.session.usuario;
 
 
@@ -128,23 +185,23 @@ const listarPokemon = async (req,res) => {
       pokemones
     });
 
-  } catch (error) {
+    } catch (error) {
     console.log(error);
     res.send("Error al obtener pokemones");
-  }
+    }
 };
 
 const comprarPokemon = async (req,res) => {
-  const id = req.params.id;
-  const usuario = req.session.usuario;
-  const t = await db.transaction();
+    const id = req.params.id;
+    const usuario = req.session.usuario;
+    const t = await db.transaction();
 
-  try {
-    const pokemon = await Pokemon.findByPk(id, { transaction: t });
+    try {
+      const pokemon = await Pokemon.findByPk(id, { transaction: t });
 
-    if (!pokemon || pokemon.estado !== "disponible") {
-      throw new Error("No disponible");
-    }
+      if (!pokemon || pokemon.estado !== "disponible") {
+        throw new Error("No disponible");
+      }
 
     const pendiente = await Venta.findOne({
       where: {
@@ -172,10 +229,10 @@ const comprarPokemon = async (req,res) => {
 
     return res.redirect("/inicio?msg=compra_exitosa");
 
-  } catch (error) {
-    await t.rollback();
-    return res.redirect("/inicio?msg=error");
-  }
+    } catch (error) {
+      await t.rollback();
+      return res.redirect("/inicio?msg=error");
+    }
 }
 
 //Venta - Controllers
@@ -351,6 +408,8 @@ export {
     DeleteUsuario,
     getAltaPokemon,
     postAltaPokemon,
+    listarMisPokemon,
+    deletePokemon,
     listarPokemon,
     comprarPokemon,
     getVentas,

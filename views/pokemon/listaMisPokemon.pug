@@ -1,0 +1,56 @@
+extends ../layout/index
+
+block estilos
+  link(rel="stylesheet", href="/css/listaPoke.css")
+  link(rel="shortcut icon", href="/favicon/poke2.png")
+
+block cuerpocontenido
+  .container
+    h1 Mis Pokémon
+
+    .grid
+      each p in pokemones
+        .card
+            if p.foto
+                img(src=`/uploads/pokemon/${p.foto}`)
+            else
+                img(src="/img/no-image.png")
+
+            h3= p.nombre
+
+            p.tipo Tipo: #{p.tipo}
+            p Nivel: #{p.nivel}
+            p.precio $#{p.precio}
+            p Estado: #{p.estado}
+
+            if p.estado === 'pendiente'
+                p.text-warning En proceso de venta
+
+            //Boton de eliminar
+            if p.estado === 'disponible'
+                button.btn-eliminar(type="button", onclick=`confirmarEliminar(${p.id_pokemon})`) Eliminar
+            else if p.estado === 'pendiente'
+                button(disabled) En transacción
+            else if p.estado === 'eliminado'
+                button(disabled) Eliminado
+
+    script(src="https://cdn.jsdelivr.net/npm/sweetalert2@11")
+
+    script.
+        function confirmarEliminar(id) {
+            Swal.fire({
+            title: '¿Eliminar Pokémon?',
+            text: 'No podrás revertir esto',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = `/inicio/lista-mis-pokemones/delete/${id}?_method=DELETE`;
+                    document.body.appendChild(form);
+                    form.submit();
+            }
+            });
+        }

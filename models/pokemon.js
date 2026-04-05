@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       }
     },
     estado: {
-      type: DataTypes.ENUM('disponible', 'pendiente', 'vendido'),
+      type: DataTypes.ENUM('disponible', 'pendiente', 'vendido', 'eliminado'),
       defaultValue: 'disponible'
     },
     foto: {
