@@ -19,7 +19,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
 
         if usuario && (usuario.rol === 'admin' || usuario.rol === 'vendedor')
           li.nav-item.dropdown
-            a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown') Pokémon
+            a.nav-link.dropdown-toggle(href='#' data-bs-toggle='dropdown') Mis Pokémon
             ul.dropdown-menu
               li
                 a.dropdown-item(href='/inicio/alta-pokemon') Registrar Pokémon
@@ -28,6 +28,9 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
 
         li.nav-item
           a.nav-link(href='/inicio/lista-pokemon') Catálogo
+
+        li.nav-item
+          a.nav-link(href='/inicio/transacciones') Transacciones
 
       ul.navbar-nav
         if usuario

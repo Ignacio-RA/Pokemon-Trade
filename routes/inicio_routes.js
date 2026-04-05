@@ -10,7 +10,10 @@ import {inicio,
     getAltaPokemon,
     postAltaPokemon,
     listarPokemon,
-    comprarPokemon} from "../controllers/inicioController.js"
+    comprarPokemon,
+    getVentas,
+    postVentaAprobada,
+    postVentaRechazada} from "../controllers/inicioController.js"
 
 const router=express.Router();
 //Routing
@@ -33,5 +36,10 @@ router.post('/inicio/alta-pokemon/new',
 
 router.get('/inicio/lista-pokemon', protegerRuta, listarPokemon)
 router.post('/inicio/comprar/:id', protegerRuta, comprarPokemon)
+
+//Ventas
+router.get('/inicio/transacciones', protegerRuta, getVentas)
+router.post('/inicio/transacciones/aprobar/:id', protegerRuta, postVentaAprobada)
+router.post('/inicio/transacciones/rechazar/:id',protegerRuta, postVentaRechazada)
 
 export default router

@@ -17,7 +17,8 @@ Usuario.hasMany(Venta, {
 });
 
 Venta.belongsTo(Usuario, {
-  foreignKey: "comprador_id"
+  foreignKey: "comprador_id",
+  as: "comprador"
 });
 
 // Usuario (dueño) -> Pokemon
@@ -26,7 +27,8 @@ Usuario.hasMany(Pokemon, {
 });
 
 Pokemon.belongsTo(Usuario, {
-  foreignKey: "id_dueno"
+  foreignKey: "id_dueno",
+  as: "dueno"
 });
 
 // Pokemon -> Venta (solicitudes)
@@ -35,7 +37,8 @@ Pokemon.hasMany(Venta, {
 });
 
 Venta.belongsTo(Pokemon, {
-  foreignKey: "pokemon_id"
+  foreignKey: "pokemon_id",
+  as: "pokemon"
 });
 
 export {

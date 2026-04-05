@@ -1,0 +1,30 @@
+extends ../layout/index
+
+block estilos
+  link(rel="stylesheet", href="/css/listaPoke.css")
+  link(rel="shortcut icon", href="/favicon/poke2.png")
+
+block cuerpocontenido
+  .container
+    h1 Transacciones
+
+    .grid
+    each v in ventas
+        .card
+            if v.pokemon.foto
+                img(src=`/uploads/pokemon/${v.pokemon.foto}`)
+            else
+                img(src="/img/no-image.png")
+
+            h3= v.pokemon.nombre
+            p Dueño: #{v.pokemon.dueno.correo}
+            p Comprador: #{v.comprador.correo}
+            p Estado: #{v.estado}
+
+            //SOLO vendedor dueño puede aprobar
+            if v.pokemon.id_dueno === usuario.id && v.estado === 'pendiente'
+                form(method="POST", action=`/inicio/transacciones/aprobar/${v.id_venta}`)
+                    button.btn-aprobar Aprobar
+
+                form(method="POST", action=`/inicio/transacciones/rechazar/${v.id_venta}`)
+                    button.btn-rechazar Rechazar

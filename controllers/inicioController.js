@@ -102,7 +102,7 @@ const postAltaPokemon = async (req,res)=>{
     }
 }
 
-const listarPokemon = async (req, res) => {
+const listarPokemon = async (req,res) => {
   try {
     const usuario = req.session.usuario;
 
@@ -117,6 +117,7 @@ const listarPokemon = async (req, res) => {
       include: [
         {
           model: Usuario,
+          as: "dueno",
           attributes: ["correo"]
         }
       ],
@@ -133,7 +134,7 @@ const listarPokemon = async (req, res) => {
   }
 };
 
-const comprarPokemon = async (req, res) => {
+const comprarPokemon = async (req,res) => {
   const id = req.params.id;
   const usuario = req.session.usuario;
   const t = await db.transaction();
@@ -177,6 +178,170 @@ const comprarPokemon = async (req, res) => {
   }
 }
 
+//Venta - Controllers
+const getVentas = async (req,res) => {
+  try {
+    const usuario = req.session.usuario;
+
+    let whereVenta = {};
+    let include = [
+    {
+      model: Pokemon,
+      as: "pokemon",
+      include: [
+        {
+          model: Usuario,
+          as: "dueno",
+          attributes: ["id", "correo"]
+        }
+      ]
+      },
+      {
+        model: Usuario,
+        as: "comprador",
+        attributes: ["id", "correo"]
+      }
+    ];
+
+  // Lógica por rol
+  if (usuario.rol === "admin") {
+    // ve todo → no filtramos
+  }
+
+  if (usuario.rol === "vendedor") {
+    whereVenta = {
+    [Op.or]: [
+      { comprador_id: usuario.id },
+      { "$pokemon.id_dueno$": usuario.id }
+    ]
+  };
+  }
+
+  if (usuario.rol === "comprador") {
+    whereVenta.comprador_id = usuario.id;
+  }
+
+  const ventas = await Venta.findAll({
+    where: whereVenta,
+    include,
+    order: [["id_venta", "DESC"]]
+  });
+
+  res.render("venta/listaVenta", {
+    ventas,
+    usuario
+  });
+
+  } catch (error) {
+    return res.redirect("/inicio?msg=error_venta");
+  }
+}
+
+const postVentaAprobada = async (req,res) => {
+  const { id } = req.params;
+  const usuario = req.session.usuario;
+
+  const t = await db.transaction();
+
+  try {
+    const venta = await Venta.findByPk(id, {
+      include: {
+        model: Pokemon,
+        as: "pokemon"
+      },
+      transaction: t
+    });
+
+    // Validaciones
+    if (!venta) throw new Error("Venta no encontrada");
+
+    if (venta.estado !== "pendiente") {
+      throw new Error("La venta ya fue procesada");
+    }
+
+    if (venta.pokemon.id_dueno !== usuario.id) {
+      throw new Error("No autorizado");
+    }
+
+    // Actualizar venta
+    await venta.update(
+      {
+        estado: "aprobada",
+        fecha_respuesta: new Date()
+      },
+      { transaction: t }
+    );
+
+    // Actualizar pokemon
+    await venta.pokemon.update(
+      {
+        estado: "vendido"
+      },
+      { transaction: t }
+    );
+
+    await t.commit();
+    return res.redirect("/inicio?msg=venta_aprobada");
+
+  } catch (error) {
+    await t.rollback();
+    return res.redirect(`/inicio?msg=error&error=${error.message}`);
+  }
+}
+
+const postVentaRechazada = async (req,res) => {
+  const { id } = req.params;
+  const usuario = req.session.usuario;
+
+  const t = await db.transaction();
+
+  try {
+    const venta = await Venta.findByPk(id, {
+      include: {
+        model: Pokemon,
+        as: "pokemon"
+      },
+      transaction: t
+    });
+
+    // Validaciones
+    if (!venta) throw new Error("Venta no encontrada");
+
+    if (venta.estado !== "pendiente") {
+      throw new Error("La venta ya fue procesada");
+    }
+
+    if (venta.pokemon.id_dueno !== usuario.id) {
+      throw new Error("No autorizado");
+    }
+
+    // Rechazar venta
+    await venta.update(
+      {
+        estado: "rechazada",
+        fecha_respuesta: new Date()
+      },
+      { transaction: t }
+    );
+
+    // Regresar pokemon a disponible
+    await venta.pokemon.update(
+      {
+        estado: "disponible"
+      },
+      { transaction: t }
+    );
+
+    await t.commit();
+
+    return res.redirect("/inicio?msg=venta_rechazada");
+
+  } catch (error) {
+    await t.rollback();
+    return res.redirect(`/inicio?msg=error_venta&error=${error.message}`);
+  }
+}
+
 export {
     inicio,
     principal,
@@ -187,5 +352,8 @@ export {
     getAltaPokemon,
     postAltaPokemon,
     listarPokemon,
-    comprarPokemon
+    comprarPokemon,
+    getVentas,
+    postVentaAprobada,
+    postVentaRechazada
 }

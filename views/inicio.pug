@@ -33,3 +33,15 @@ block cuerpocontenido
         text: 'Algo salió mal',
         icon: 'error'
       });
+
+  if mensaje === 'error_venta'
+    script.
+      Swal.fire('Error', 'Ocurrió un problema', 'error');
+  
+  if mensaje === 'venta_aprobada'
+    script.
+      Swal.fire('Éxito', 'Venta aprobada', 'success');
+  
+  if mensaje === 'venta_rechazada'
+    script.
+      Swal.fire('Info', 'Venta rechazada', 'info');

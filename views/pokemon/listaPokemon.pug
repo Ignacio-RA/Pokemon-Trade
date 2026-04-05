@@ -21,7 +21,7 @@ block cuerpocontenido
           p.tipo Tipo: #{p.tipo}
           p Nivel: #{p.nivel}
           p.precio $#{p.precio}
-          p Dueño: #{p.Usuario.correo}
+          p Dueño: #{p.dueno.correo}
 
           //Boton de compra
           if p.estado == 'disponible'
