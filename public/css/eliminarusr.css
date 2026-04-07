@@ -24,6 +24,7 @@ h1 {
 h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: black;
 }
 
 /* Tabla */
@@ -37,9 +38,12 @@ thead {
   color: white;
 }
 
-th, td {
-  padding: 12px;
-  text-align: center;
+th {
+  color: white; /* encabezado */
+}
+
+td {
+  color: black; /* datos */
 }
 
 /* Filas */

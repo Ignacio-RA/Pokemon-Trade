@@ -1,0 +1,129 @@
+/* ===== BASE ===== */
+body {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  background: rgba(15, 23, 42, 0.85) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Links */
+.nav-link {
+  color: #e2e8f0 !important;
+}
+
+.nav-link:hover {
+  color: #6366f1 !important;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background-color: #1e293b;
+  border: none;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+/* ===== BOTONES ===== */
+.btn-primary {
+  background-color: #6366f1;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #4f46e5;
+}
+
+.btn-warning {
+  background-color: #facc15;
+  border: none;
+  color: black;
+}
+
+.btn-warning:hover {
+  background-color: #eab308;
+}
+
+/* ===== HERO (lo usarás después) ===== */
+.hero {
+  background: linear-gradient(90deg, #6366f1, #22c55e);
+  border-radius: 15px;
+  color: white;
+}
+
+/* ===== TEXTOS ===== */
+h1, h2, h3, h4 {
+  font-weight: bold;
+}
+
+/* ===== SOMBRAS ===== */
+.shadow {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
+}
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(90deg, #6366f1, #22c55e);
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+}
+
+/* ===== GRID AJUSTES ===== */
+.row {
+  margin-top: 20px;
+}
+
+/* ===== CARDS TEXTO ===== */
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.card h3,
+.card h5 {
+  color: #f8fafc; /* blanco elegante */
+}
+
+.card p {
+  color: #cbd5f5; /* gris claro visible */
+}
+/* ===== BOTONES OUTLINE ===== */
+.btn-outline-primary {
+  border-color: #6366f1;
+  color: #6366f1;
+}
+
+.btn-outline-primary:hover {
+  background-color: #6366f1;
+  color: white;
+}
+
+.btn-outline-success {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+.btn-outline-success:hover {
+  background-color: #22c55e;
+  color: white;
+}
+
+.btn-outline-warning {
+  border-color: #facc15;
+  color: #facc15;
+}
+
+.btn-outline-warning:hover {
+  background-color: #facc15;
+  color: black;
+}
