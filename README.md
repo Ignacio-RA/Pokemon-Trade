@@ -70,5 +70,3 @@ Pokemon-Trade/
 ├── Dockerfile          # Instrucciones de construcción para la imagen Node
 ├── docker-compose.yml  # Orquestador de servicios (App + Base de Datos)
 └── package.json        # Dependencias y scripts del proyecto
-
----
