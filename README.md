@@ -24,7 +24,33 @@ El sistema implementa el patrón **Modelo-Vista-Controlador** y utiliza **Sequel
 
 ---
 
-## 2. Estructura del Proyecto
+## 2. Ejecución con Docker
+
+Sigue estos pasos para construir la imagen y poner en marcha el proyecto en cualquier computadora de forma rápida y sencilla.
+
+### **Paso 1: Configuración de Entorno**
+Antes de iniciar, es obligatorio tener un archivo `.env` en la raíz del proyecto con la siguiente configuración base:
+
+```env
+BD_NOMBRE= db_nombre
+BD_USUARIO= usuario
+BD_CLAVE= contraseña
+BD_DIALEC= 'mysql'
+BD_HOST= db
+BD_PORT= 3306
+
+APP_PORT=4800
+```
+### **Paso 2: COnstruir la imagen y levantar contenedores**
+Para construir la imagen personalizada de la aplicación (basada en el Dockerfile) y levantar el servicio de base de datos MySQL simultáneamente, ejecuta el siguiente comando en tu terminal:
+
+docker compose up --build
+
+Nota: Este proceso descarga las imágenes base, instala las dependencias de Node.js mediante npm install y prepara el volumen para la persistencia de datos.
+
+----
+
+## 3. Estructura del Proyecto
 
 ```text
 Pokemon-Trade/
@@ -46,27 +72,3 @@ Pokemon-Trade/
 └── package.json        # Dependencias y scripts del proyecto
 
 ---
-
-## 3. Guía de Ejecución con Docker
-
-Sigue estos pasos para construir la imagen y poner en marcha el proyecto en cualquier computadora de forma rápida y sencilla.
-
-### **Paso 1: Configuración de Entorno**
-Antes de iniciar, es obligatorio tener un archivo `.env` en la raíz del proyecto con la siguiente configuración base:
-
-```env
-BD_NOMBRE= db_nombre
-BD_USUARIO= usuario
-BD_CLAVE= contraseña
-BD_DIALEC= 'mysql'
-BD_HOST= db
-BD_PORT= 3306
-
-APP_PORT=4800
-
-### **Paso 2: COnstruir la imagen y levantar contenedores**
-Para construir la imagen personalizada de la aplicación (basada en el Dockerfile) y levantar el servicio de base de datos MySQL simultáneamente, ejecuta el siguiente comando en tu terminal:
-
-docker compose up --build
-
-Nota: Este proceso descarga las imágenes base, instala las dependencias de Node.js mediante npm install y prepara el volumen para la persistencia de datos.
